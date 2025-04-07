@@ -1,0 +1,127 @@
+Open Edge from Taskbar
+	...
+		Settings
+Downloads
+	Ask me what to do with each download
+Close Settings tab
+
+
+Visual C++ Redistributables:
+https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist
+
+Latest version: 14.40.33816.0
+https://aka.ms/vs/17/release/vc_redist.x86.exe
+https://aka.ms/vs/17/release/vc_redist.x64.exe
+
+
+PowerShell 7:
+https://github.com/PowerShell/PowerShell/releases
+PowerShell-7.4.6-win-x64.msi
+
+https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows
+
+
+
+New-Item -Path "C:\Windows\Windows Terminal" -ItemType "Directory" -Force
+Exit
+
+
+Winget (Windows Package Manager):
+https://github.com/microsoft/winget-cli/releases
+
+0a769c4da0ae4747ba4ab2f173709ced_License1.xml
+DesktopAppInstaller_Dependencies.zip
+	.\x64
+		Microsoft.UI.Xaml.2.8_8.2310.30001.0_x64.appx
+		Microsoft.VCLibs.140.00.UWPDesktop_14.0.33728.0_x64.appx
+		
+
+Right-click Start
+	Windows PowerShell (Admin)
+
+# Define the download destination path
+$destinationFolderPath = "C:\Windows\Windows Terminal"
+
+# Define the filenames
+$appx1Filename = "Microsoft.UI.Xaml.2.8_8.2310.30001.0_x64.appx"
+$appx2Filename = "Microsoft.VCLibs.140.00.UWPDesktop_14.0.33728.0_x64.appx"
+$msixwingetFilename = "Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle"
+$wingetLic = "0a769c4da0ae4747ba4ab2f173709ced_License1.xml"
+
+# Construct full paths
+$appx1Path = Join-Path -Path $destinationFolderPath -ChildPath $appx1Filename
+$appx2Path = Join-Path -Path $destinationFolderPath -ChildPath $appx2Filename
+$msixbundlePath = Join-Path -Path $destinationFolderPath -ChildPath $msixbundleFilename
+$msixwingetPath = Join-Path -Path $destinationFolderPath -ChildPath $msixwingetFilename
+$wingetLicPath = Join-Path -Path $destinationFolderPath -ChildPath $wingetLic
+
+# Add Appx packages
+Add-AppxPackage -Path "$appx1Path"
+Add-AppxPackage -Path "$appx2Path"
+
+Add-AppxProvisionedPackage -Online -PackagePath $msixwingetPath -LicensePath $wingetLicPath
+
+Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+
+
+winget install Microsoft.WindowsTerminal
+	Y
+	
+Exit
+
+
+Start
+	Terminal
+
+winget list
+
+choco list
+
+# Multi-line paste test
+Write-Host "Warning."
+
+
+Settings
+	Open JSON
+		Notepad
+			Just once
+		
+		After "$schema": "https://aka.ms/terminal-profiles-schema",
+		Paste "multiLinePasteWarning": false,
+	Save
+Close Notepad
+
+Close Terminal
+
+Start
+	Right-click Terminal
+		More
+			Pin to taskbar
+
+Terminal
+
+	
+# Multi-line paste test
+Write-Host "No more Warning."
+
+winget install 7-Zip --version 24.07
+
+choco install notepadplusplus.install --version 8.6.9 -y
+
+winget update --include-unknown
+choco outdated
+
+choco install notepadplusplus.install --version 8.7.0 -y
+winget upgrade --all
+
+OR
+
+choco upgrade all -y
+
+
+winget list
+choco list
+
+choco search adobe | more
+
+winget search --query "Adobe" | more
